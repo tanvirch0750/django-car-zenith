@@ -3,8 +3,19 @@
 
 
 {% block content %}
-    <!-- content -->
-    <h1 class=" text-mainred">Hello workd</h1>
+
+<header>
+  <div class="hero min-h-[600px]" style="background-image: url('{% static 'images/banner/banner.jpg' %}');">
+    <div class="hero-overlay bg-opacity-70"></div>
+    <div class="hero-content text-center text-neutral-content">
+      <div class="max-w-3xl">
+        <h1 class="mb-5 text-6xl font-bold text-red-100">Discover Your Drive with CarZenith</h1>
+        <h2 class="mb-5 text-2xl text-white">Where Excellence Meets the Open Road</h2>
+        <button class="btn bg-mainred hover:bg-red-700 border-0 text-white  rounded-none px-10">Explore Cars</button>
+      </div>
+    </div>
+  </div>
+</header>
    
     
 {% endblock %}
