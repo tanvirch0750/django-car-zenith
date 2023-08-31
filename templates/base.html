@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              mainred: '#da373d',
+              maingray: '#363636',
+              maingray2: '#999999'
+            },
+            fontFamily: {
+              Roboto: ['Roboto', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <link href="{% static 'style/style.css' %}" rel="stylesheet" type="text/css"/>
+    <title>Car Zenith</title>
+  </head>
+  <body class=" font-Roboto">
+
+      <!-- navbar -->
+      <div class="drawer">
+        <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
+        <div class="drawer-content flex flex-col">
+          <!-- Navbar -->
+          <div class="w-full navbar bg-maingray">
+            <div class="flex-none lg:hidden">
+              <label for="my-drawer-3" class="btn btn-square btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+              </label>
+            </div> 
+            <div class="flex-1 px-2 mx-2"><span class="font-bold text-white text-2xl">Car</span> <span class="font-bold text-mainred text-2xl">Zenith</span></div>
+            <div class="flex-none hidden lg:block">
+              <ul class=" flex items-center gap-4 pr-2 mr-2">
+                <!-- Navbar menu content here -->
+                <li><a class=" text-white hover:text-mainred cursor-pointer">Home</a></li>
+                <li class="text-white hover:text-mainred cursor-pointer"><a>Cars</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- Page content here -->
+          
+          <main class=" min-h-screen">
+            {% block content %}
+          <!-- content -->
+          {% endblock %}
+          </main>
+         
+        </div> 
+        <div class="drawer-side">
+          <label for="my-drawer-3" class="drawer-overlay"></label> 
+          <ul class="menu p-4 w-80 min-h-full bg-maingray">
+            <!-- Sidebar content here -->
+            <li><a class=" text-white hover:text-mainred cursor-pointer">Home</a></li>
+            <li class="text-white hover:text-mainred cursor-pointer"><a>Cars</a></li>
+            
+          </ul>
+          
+        </div>
+      </div>
+
+      <!-- footer -->
+{% include 'includes/footer.html' %}
+  </body>
+</html>
+
+
+<!-- 
+   <button class="btn bg-mainred hover:bg-red-700 border-0 text-white  rounded-none">Button</button>
+ -->
