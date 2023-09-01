@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<section class="mx-auto py-12 bg-red-50 px-2 h-full">
+  
+  <div class=" max-w-2xl mx-auto bg-maingray p-6 rounded-sm">
+    <h2 class=" text-4xl font-semibold text-mainred text-center mb-6">Login</h2>
+    {% include 'includes/alert.html' %}
+    <form action="{% url 'login' %} " method="POST">
+        {% csrf_token %}
+    
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-white">Email</label>
+          <input type="email" class="shadow-sm bg-red-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Email Address" name="email">
+        </div>
+    
+    
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-white"
+            >Password</label
+          >
+          <input type="password" class="shadow-sm bg-red-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Password" name="password">
+        </div>
+    
+       
+        <button
+          type="submit"
+          class="btn bg-mainred hover:bg-red-700 border-0 text-white  rounded-none"
+        >
+          Login
+        </button>
+        <span class=" text-red-600 text-lg mt-2">
+            {{ form.email.errors }}
+        </span> 
+        <span class="text-red-600 text-lg mt-8">
+            {{ form.non_field_errors }}
+        </span>
+      </form>
+  </div>
+</section>
+
+{% endblock %}

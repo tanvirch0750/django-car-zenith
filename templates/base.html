@@ -46,9 +46,19 @@
             <div class="flex-1 px-2 mx-2"><span class="font-bold text-white text-2xl">Car</span> <span class="font-bold text-mainred text-2xl">Zenith</span></div>
             <div class="flex-none hidden lg:block">
               <ul class=" flex items-center gap-4 pr-2 mr-2">
+
                 <!-- Navbar menu content here -->
-                <li><a class=" text-white hover:text-mainred cursor-pointer">Home</a></li>
+                <li><a class=" text-white hover:text-mainred cursor-pointer" href="{% url 'home' %}">Home</a></li>
                 <li class="text-white hover:text-mainred cursor-pointer"><a>Cars</a></li>
+                {% if user.id is None %}
+               
+                <li class="text-white hover:text-mainred cursor-pointer"><a href="{% url 'login' %}">Login</a></li>
+                <li class="text-white hover:text-mainred cursor-pointer"><a href="{% url 'register' %}">Registration</a></li>
+                {% else %}
+
+                <li class="text-white hover:text-mainred cursor-pointer"><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+               
               </ul>
             </div>
           </div>
@@ -75,6 +85,23 @@
 
       <!-- footer -->
 {% include 'includes/footer.html' %}
+
+
+<script>
+  const alertDiv = document.getElementById('myalert');
+  const closeButton = document.getElementById('closeButton');
+
+  // Function to hide the alert
+  function hideAlert() {
+      alertDiv.style.display = 'none';
+  }
+
+  // Add a click event listener to hide the alert when the close button is clicked
+  closeButton.addEventListener('click', hideAlert);
+
+  // Set a timeout to hide the alert after a certain amount of time (e.g., 5000 milliseconds = 5 seconds)
+  setTimeout(hideAlert, 5000);
+</script>
   </body>
 </html>
 
