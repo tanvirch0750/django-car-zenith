@@ -26,7 +26,7 @@ class Car(models.Model):
         return self.title
 
     def get_url(self):
-        return reverse('product_detail', args=[self.brand.slug, self.slug])
+        return reverse('car_detail', args=[self.brand.slug, self.slug])
     
 
 
