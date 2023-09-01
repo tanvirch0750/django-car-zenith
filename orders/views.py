@@ -26,9 +26,23 @@ def place_order(request, car_id):
                 order_item.order_number = order_number
                 order_item.save()
 
-            return redirect('cars')
+            return redirect('user_orders')
         except Exception as e:
             print(str(e))
             pass
 
-    return redirect('cars')
+    return redirect('car_detail')
+
+@login_required(login_url='login')
+def user_orders(request):
+    
+     current_user = request.user
+     orders = Orders.objects.filter(user=current_user)
+     orders_count = orders.count()
+     
+
+     context = {
+        'orders': orders,
+        'orders_count': orders_count,
+      }
+     return render(request, 'orders/user_orders.html', context)

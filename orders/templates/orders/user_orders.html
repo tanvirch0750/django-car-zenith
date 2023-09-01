@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class=" container mx-auto px-2 pt-10 pb-5">
+    <div class="text-center">
+      <span class="uppercase text-md font-medium text-mainred mb-2">Thank you for your Orders</span>
+      <h2 class=" text-4xl font-bold text-maingray mb-4">Welcome <span class="text-mainred">{{request.user.first_name}}</span></h2>
+    </div>
+</section>
+
+{% if orders_count > 0 %}
+<section class=" container mx-auto px-2 pb-20">
+
+
+    <div class="overflow-x-auto rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm text-center">
+          <thead class="ltr:text-left rtl:text-right">
+            <tr>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Car
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Brand
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Price
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Message
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Status
+              </th>
+            </tr>
+          </thead>
+      
+          <tbody class="divide-y divide-gray-200">
+            {% for order in orders %}
+            <tr>
+              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                {{order.car.title}}
+              </td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ order.car.brand }}</td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">${{ order.car.price }}</td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                {% if order.status == 'Pending' %}
+                <span class=" bg-yellow-100 px-2 py-1 rounded-lg">We will conatact you shortly</span>
+                {% else %}
+                <span class="bg-red-100 px-2 py-1 rounded-lg">Happy Driving!</span>
+                {% endif %}
+              </td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                <span class="{% if order.status == 'Completed' %}bg-green-300{% else %}bg-yellow-300{% endif %} px-2 py-1 rounded-lg">
+                    {{ order.status }}
+                </span>
+              </td>
+            </tr>
+          {% endfor %}
+            
+      
+           
+          </tbody>
+        </table>
+      </div>
+    </section>
+{% else %}
+<section class=" container mx-auto px-2 py-20 text-center">
+    <div class=" py-11 px-6 bg-red-50">
+        <h2 class=" text-4xl font-semibold text-maingray">You don't have any cars in your Orders List. Please place a order first.</h2>
+    </div>
+</section>
+{% endif %}
+
+
+{% endblock %}
