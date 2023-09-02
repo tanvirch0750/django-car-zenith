@@ -46,3 +46,20 @@ def user_orders(request):
         'orders_count': orders_count,
       }
      return render(request, 'orders/user_orders.html', context)
+ 
+ 
+ 
+@login_required(login_url='login')
+def mark_order_complete(request, order_id):
+    if request.user.is_admin:
+        try:
+            order = Orders.objects.get(id=order_id)
+            if order.status == 'Pending':
+                order.status = 'Completed'
+                order.save()
+                return redirect('admin_orders')
+        
+        except Orders.DoesNotExist:
+            pass
+    else:
+        return render(request, 'admin_dashboard/access_denied.html')

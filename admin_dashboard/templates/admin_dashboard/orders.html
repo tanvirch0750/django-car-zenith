@@ -1,0 +1,67 @@
+{% extends 'admin_dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+<section class="px-4 py-4">
+    <div class="text-center">
+        <h2 class="pb-8 text-4xl font-bold text-mainred">Manage Orders</h2>
+      </div>
+    <div class="overflow-x-auto">
+        <table class="table text-center">
+          <!-- head -->
+          <thead class=" text-lg ">
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>User</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+
+            {% for order in orders %}
+            <tr>
+                <td>
+                  <div class="flex items-center space-x-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-14 h-14">
+                        <img src="{{ order.car.images.url }}" alt="{{ car.title }}" />
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  {{ order.car.title }}
+                  
+                </td>
+                <td class=""><span class="bg-yellow-200 px-2 py-1 rounded-md">{{ order.user.email }}</span></td>
+                <td>${{ order.car.price }}</td>
+                <th>
+                    {% if order.status == 'Pending' %}
+                <span class=" bg-orange-200 px-2 py-1 rounded-md">Pending</span>
+                {% else %}
+                <span class="bg-green-200 px-2 py-1 rounded-md">Completed</span>
+                {% endif %}
+                </th>
+                <th>
+                  {% if order.status == 'Pending' %}
+                  <a class="btn bg-mainred hover:bg-red-700 text-white btn-sm" href="{% url 'mark_order_complete' order.id %}">Make Complete</a>
+                  {% else %}
+                  <button class="btn bg-green-500 hover:bg-green-700 text-white btn-sm">Done</button>
+                  {% endif %}
+                </th>
+              </tr>
+            {% endfor %}
+
+            
+           
+          </tbody>
+         
+          
+        </table>
+      </div>
+</section>
+{% endblock %}
