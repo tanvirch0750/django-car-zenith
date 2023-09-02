@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from car.models import Car
+from django.contrib.auth.decorators import login_required
+from .forms import CarForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -25,3 +28,27 @@ def car_detail(request, brand_slug, car_slug):
         'features_list': features_list
     }
     return render(request, 'car/car_detail.html', context)
+
+
+@login_required(login_url='login')
+def create_car(request):
+    if request.user.is_admin:
+        if request.method == 'POST':
+            print(request.POST)
+            form = CarForm(request.POST, request.FILES)
+            
+            if form.is_valid():
+                print('data', form.cleaned_data)
+                form.save()
+                
+                return redirect('dashboard')  
+        else:
+            form = CarForm()
+           
+        return render(request, 'admin_dashboard/add_car.html', {'form': form})
+       
+    else:
+        return render(request, 'admin_dashboard/access_denied.html')
+    
+   
+    

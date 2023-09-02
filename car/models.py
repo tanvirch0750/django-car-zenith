@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from account.models import Account
 from brand.models import Brand
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -27,6 +28,11 @@ class Car(models.Model):
 
     def get_url(self):
         return reverse('car_detail', args=[self.brand.slug, self.slug])
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
     
 
 

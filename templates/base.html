@@ -111,6 +111,20 @@
 
   // Set a timeout to hide the alert after a certain amount of time (e.g., 5000 milliseconds = 5 seconds)
   setTimeout(hideAlert, 5000);
+
+
+
+  // add car
+  document.addEventListener("DOMContentLoaded", function () {
+    var titleInput = document.getElementById("id_title");
+    var slugInput = document.getElementById("id_slug");
+
+    titleInput.addEventListener("input", function () {
+        var titleValue = titleInput.value;
+        var slugValue = titleValue.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        slugInput.value = slugValue;
+    });
+});
 </script>
   </body>
 </html>
