@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="drawer lg:drawer-open">
+    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      {% block dashboard_content %}
+      {% endblock %}
+      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+    
+    </div> 
+    <div class="drawer-side">
+      <label for="my-drawer-2" class="drawer-overlay"></label> 
+      <ul class="p-4 w-80 min-h-full bg-maingray text-white">
+        <!-- Sidebar content here -->
+        <li class="bg-mainred hover:bg-red-700 rounded-md mb-4 text-center py-2"><a class="hover:text-white cursor-pointer">All Cars</a></li>
+        <li class="bg-mainred hover:bg-red-700 rounded-md mb-4 text-center py-2"><a class="hover:text-white cursor-pointer">Add Car</a></li>
+        <li class="bg-mainred hover:bg-red-700 rounded-md mb-4 text-center py-2"><a class="hover:text-white cursor-pointer">Orders</a></li>
+      </ul>
+    
+    </div>
+  </div>
+  {% endblock %}
