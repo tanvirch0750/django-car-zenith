@@ -1,0 +1,96 @@
+{% extends 'admin_dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+<!-- component -->
+<section class="max-w-4xl p-6 my-20 mx-auto bg-red-50 rounded-md shadow-md">
+    <h1 class="text-3xl font-bold text-mainred mb-12 capitalize text-center">Update Car</h1>
+    <form action="{% url 'update_car' car_id %}" method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+            <div>
+                <label class="text-maingray" for="title">Car Title</label>
+                {{ form.title }}
+            </div>
+
+
+            <div>
+                <label class="text-maingray" for="price">Price</label>
+                {{form.price}}
+            </div>
+
+            <div>
+                <label class="text-maingray" for="Color">Car Color</label>
+               {{form.color}}
+            </div>
+
+            <div>
+                <label class="text-maingray" for="model">Car Model</label>
+               {{form.model}}
+            </div>
+
+            <div>
+                <label class="text-maingray" for="passwordConfirmation">Select Brand</label>
+                {{form.brand}}
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-maingray">
+                Image
+              </label>
+              <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md text-maingray">
+                <div class="space-y-1">
+                  
+                  <div class="text-sm text-maingray">
+                    
+                      
+                     {{form.images}}
+                    </label>
+                    
+                  </div>
+                  <p class="text-xs text-maingray">
+                    PNG, JPG up to 2MB
+                  </p>
+                </div>
+              </div>
+            </div>
+           
+           
+            <div>
+                <label class="text-maingray" for="description">Description</label>
+                {{form.description}}
+            </div>
+
+            <div>
+                <label class="text-maingray" for="features">Features <span class="text-xs text-maingray2">(Add features separated by comma. Ex. feature 1, feature 2)</span></label>
+               {{form.features}}
+            </div>
+
+           
+
+            
+            <div class="flex items-center mb-4">
+               {{form.is_available}}
+                <label for="checkbox-1" class="ml-2 text-sm font-medium text-maingray ">Is available</label>
+            </div>
+
+            <div class="flex items-center mb-4">
+                {{form.is_featured}}
+                <label for="checkbox-1" class="ml-2 text-sm font-medium text-maingray ">Is Featured</label>
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <button type="submit" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-mainred rounded-md hover:bg-red-700 focus:outline-none focus:bg-gray-600">Save</button>
+        </div>
+        <span class=" text-red-600 text-lg mt-2">
+            {{ form.email.errors }}
+        </span> 
+        <span class="text-red-600 text-lg mt-8">
+            {{ form.non_field_errors }}
+        </span>
+    </form>
+</section>
+
+ 
+{% endblock %}

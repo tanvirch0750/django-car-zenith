@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from car.models import Car
 from django.contrib.auth.decorators import login_required
 from .forms import CarForm
@@ -47,6 +47,26 @@ def create_car(request):
            
         return render(request, 'admin_dashboard/add_car.html', {'form': form})
        
+    else:
+        return render(request, 'admin_dashboard/access_denied.html')
+    
+
+@login_required(login_url='login')
+def update_car(request, car_id):
+    if request.user.is_admin:
+    
+        car = get_object_or_404(Car, id=car_id)
+
+        if request.method == 'POST':
+            form = CarForm(request.POST, request.FILES, instance=car)
+            if form.is_valid():
+                form.save()
+               
+        else:
+            form = CarForm(instance=car)
+
+        return render(request, 'admin_dashboard/update_car.html', {'form': form, 'car_id': car_id})
+    
     else:
         return render(request, 'admin_dashboard/access_denied.html')
     
